@@ -22,6 +22,15 @@
     </item>
     
     <item>
+      <title>projectCASA_EDA</title>
+      <link>/2020/06/06/projectcasa-eda/</link>
+      <pubDate>Sat, 06 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/06/projectcasa-eda/</guid>
+      <description>0. 들어가며이 게시글은 서울 아파트 실거래가 예측 시스템을 구축하는 프로젝트에서 EDA파트를 담고 있다.1. EDA에 필요한 라이브러리import pandas as pdimport jsonimport psycopg2import numpy as npimport matplotlib.pyplot as pltimport seaborn as sns%matplotlib inlineimport warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)2. 데이터프레임 불러오기def call_df(table_name):with open(&amp;#39;config.json&amp;#39;, &amp;#39;r&amp;#39;) as f:config = json.load(f)conn = psycopg2.connect(user = config[&amp;#39;USER&amp;#39;],password = config[&amp;#39;PASSWORD&amp;#39;],host = config[&amp;#39;HOST&amp;#39;],port = config[&amp;#39;PORT&amp;#39;],database = config[&amp;#39;DATABASE&amp;#39;])sql = f&amp;#39;SELECT * FROM {table_name}&amp;#39;df = pd.</description>
+    </item>
+    
+    <item>
       <title>resume</title>
       <link>/2020/06/05/resume/</link>
       <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
