@@ -26,7 +26,7 @@ tags: []
 - 대여정보와, 이용자정보에 대한 데이터프레임을 가져온다 
 ```python
 import pandas as pd
-import folium
+inemport folium
 rental_info = pd.read_csv("./DATA/rental_info.csv",engine='python')
 rental_info.head()
 ```
