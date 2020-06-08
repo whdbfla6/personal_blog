@@ -6,10 +6,28 @@
     <description>Recent content on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>project_Casa_eda_WithResult</title>
+      <link>/2020/06/09/project-casa-eda-withresult/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/09/project-casa-eda-withresult/</guid>
+      <description>0. &amp;#46308;&amp;#50612;&amp;#44032;&amp;#47728;&amp;#182;이 게시글은 서울 아파트 실거래가 예측 시스템을 구축하는 프로젝트에서 EDA파트를 담고 있다1. EDA&amp;#50640; &amp;#54596;&amp;#50836;&amp;#54620; &amp;#46972;&amp;#51060;&amp;#48652;&amp;#47084;&amp;#47532;&amp;#182;In&amp;nbsp;[1]:import pandas as pdimport jsonimport psycopg2import numpy as npimport matplotlib.pyplot as pltimport seaborn as sns%matplotlib inlineimport warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)2. &amp;#45936;&amp;#51060;&amp;#53552;&amp;#54532;&amp;#47112;&amp;#51076; &amp;#48520;&amp;#47084;&amp;#50724;&amp;#44592;&amp;#182;In&amp;nbsp;[2]:def call_df(table_name):with open(&amp;#39;config.json&amp;#39;, &amp;#39;r&amp;#39;) as f:config = json.</description>
+    </item>
+    
+    <item>
+      <title>따릉이_data_Visualization_with_Result</title>
+      <link>/2020/06/09/data-visualization/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/09/data-visualization/</guid>
+      <description>information_visualization/*!** Twitter Bootstrap**//*!* Bootstrap v3.3.7 (http://getbootstrap.com)* Copyright 2011-2016 Twitter, Inc.* Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html {font-family: sans-serif;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}body {margin: 0;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {display: block;}audio,canvas,progress,video {display: inline-block;vertical-align: baseline;}audio:not([controls]) {display: none;height: 0;}[hidden],template {display: none;}a {background-color: transparent;}a:active,a:hover {outline: 0;}abbr[title] {border-bottom: 1px dotted;}b,strong {font-weight: bold;}dfn {font-style: italic;}h1 {font-size: 2em;margin: 0.</description>
+    </item>
     
     <item>
       <title>data_Visualization</title>
@@ -46,15 +64,6 @@
       
       <guid>/about/</guid>
       <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
-    </item>
-    
-    <item>
-      <title>data_visualization_withResult</title>
-      <link>/1/01/01/data_visualization_withresult/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/01/01/data_visualization_withresult/</guid>
-      <description>information_visualization/*!** Twitter Bootstrap**//*!* Bootstrap v3.3.7 (http://getbootstrap.com)* Copyright 2011-2016 Twitter, Inc.* Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html {font-family: sans-serif;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}body {margin: 0;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {display: block;}audio,canvas,progress,video {display: inline-block;vertical-align: baseline;}audio:not([controls]) {display: none;height: 0;}[hidden],template {display: none;}a {background-color: transparent;}a:active,a:hover {outline: 0;}abbr[title] {border-bottom: 1px dotted;}b,strong {font-weight: bold;}dfn {font-style: italic;}h1 {font-size: 2em;margin: 0.</description>
     </item>
     
   </channel>

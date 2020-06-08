@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+<title>data_Visualization - A Hugo website</title>
+<meta property="og:title" content="data_Visualization - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="./content/post/2020-06-05-resume">About</a></li>
+    
+    <li><a href="https://github.com/whdbfla6/personal_blog">GitHub</a></li>
+    
+    <li><a href="https://instagram.com/yoorim077">instagram</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">data_Visualization</h1>
+
+    
+    <span class="article-date">2020-06-06</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="주제" class="section level1">
+<h1>주제</h1>
+<ul>
+<li>서울 자전거(따릉이)는누구나 편리하게 사용할 수 있는 무인 자전거 대여 시스템으로, 교통체증과 대기오염의문제를 해결하기 위해 마련되었다. 본인은 서울시 공공자전거 대여소별 반납 건수와 대여 건수를 비교하여 수요를 파악하고자 한다. 이는 해당 대여소의 자전거와 거치대 수의 확대 여부에 대한 의사결정에 도움이 될 것으로 판단된다.</li>
+</ul>
+</div>
+<div id="데이터" class="section level1">
+<h1>데이터</h1>
+<p>서울 열린 데이터 광장 [<a href="https://data.seoul.go.kr/" class="uri">https://data.seoul.go.kr/</a>] 데이터를 사용하였다.</p>
+</div>
+<div id="시각화-내용" class="section level1">
+<h1>시각화 내용</h1>
+<p><strong>1. 각 대여소별 2018년6월의 대여 건수와 반납 건수 비교 (2019년자료가없어 최신 데이터를 사용하지 못하였다)</strong>
+서울 열린 데이터 광장에서 제공하고 있는 서울 자전거 관련 공공데이터를이용해 시각화를 진행하였다. 대여소별 대여 건수와 반납 건수를 비교하여, 반납 건수가 많은 지역은 파란색 대여 건수가 많은 지역은 빨간색으로 표시하였다. 원의 크기는 반납 건수와 대여 건수의 차이를 표준화하여절댓값이 클수록 크게 표시하였다.</p>
+<p><strong>2.자전거의 수가 부족한 대여소</strong>
+서울특별시공공자전거 대여 이력을 통해 이용자가 자전거를 대여시 잔여 자전거 수가 2대 이하인 사건을 구하였다. 그리고 해당 사건이 빈 번하게 발생한 대여소 상위 10군데를위도와 경도를 통해 시각화하였다.</p>
+</div>
+<div id="시각화-방법" class="section level1">
+<h1>시각화 방법</h1>
+<ul>
+<li><p>파이썬 folium 시각화 패키지를 이용하여 지도에 시각화하였다</p></li>
+<li><p>대여정보와, 이용자정보에 대한 데이터프레임을 가져온다</p></li>
+</ul>
+<pre class="python"><code>import pandas as pd
+inemport folium
+rental_info = pd.read_csv(&quot;./DATA/rental_info.csv&quot;,engine=&#39;python&#39;)
+rental_info.head()</code></pre>
+<pre class="r"><code>library(readxl)
+rental_office_info &lt;- read_excel(&#39;./DATA/rentaloffice_info.xlsx&#39;)
+rental_office_rental_info &lt;- read_excel(&#39;./DATA/rentaloffice_rental_info.xlsx&#39;)
+rental_office_info
+rental_office_rental_info</code></pre>
+<ul>
+<li>2018.06월달 대여소별 대여건수와 반납건수를 구한다</li>
+</ul>
+<pre class="python"><code>rental_office_rental_info = rental_office_rental_info[rental_office_rental_info[&#39;대여일자&#39;]==201806]
+rental_office_info = rental_office_info.drop([&#39;대여소주소&#39;,&#39;기준시작일자&#39;],axis=1)
+rental_office_rental_info = rental_office_rental_info.drop([&#39;대여일자&#39;,&#39;대여소명&#39;],axis=1)</code></pre>
+<ul>
+<li>대여소 별 위도/경도 dataframe과 대여/반납건수 dataframe을 merge해준다</li>
+</ul>
+<pre class="python"><code>rental_office = pd.merge(rental_office_info,rental_office_rental_info,how=&#39;left&#39;,left_on=&#39;대여소ID&#39;,right_on=&#39;대여소번호&#39;)
+rental_office = rental_office.dropna()
+rental_office = rental_office.drop(&#39;대여소번호&#39;,axis=1)
+rental_office.head()</code></pre>
+<ul>
+<li>반납건수가 더 많은 경우 0 대여건수가 더 많은 경우 1 동일한 값을 갖는 경우는 2를 출력한다.</li>
+</ul>
+<pre class="python"><code>def num(x):
+    if x[&#39;대여건수&#39;] &lt; x[&#39;반납건수&#39;]:
+         return 0
+    if x[&#39;대여건수&#39;] &gt; x[&#39;반납건수&#39;]:
+         return 1
+    else: return 2</code></pre>
+<pre class="python"><code>def diff(x):
+    if x[&#39;대여건수&#39;] &lt; x[&#39;반납건수&#39;]:
+         return x[&#39;반납건수&#39;] - x[&#39;대여건수&#39;]
+    if x[&#39;대여건수&#39;] &gt; x[&#39;반납건수&#39;]:
+         return x[&#39;대여건수&#39;] - x[&#39;반납건수&#39;]
+    else: return 1</code></pre>
+<pre class="python"><code>rental_office[&#39;compare_rental&#39;] = rental_office.apply(lambda x: num(x),axis=1)
+rental_office[&#39;difference&#39;] = rental_office.apply(lambda x: diff(x),axis=1)=1</code></pre>
+<pre class="python"><code>for i in rental_office.index:
+    a = (rental_office.loc[i,&#39;difference&#39;] - rental_office[&#39;difference&#39;].mean())/rental_office[&#39;difference&#39;].std()
+    rental_office.loc[i,&#39;difference&#39;] = a</code></pre>
+<ul>
+<li>compare_rental값에 따라 dataframe을 각각 구한다</li>
+</ul>
+<pre class="python"><code>df1 = rental_office[rental_office[&#39;compare_rental&#39;] == 0][[&#39;대여소명&#39;,&#39;대여소ID&#39;,&#39;위도&#39;,&#39;경도&#39;,&#39;거치대수&#39;,&#39;difference&#39;]]
+df2 = rental_office[rental_office[&#39;compare_rental&#39;] == 1][[&#39;대여소명&#39;,&#39;대여소ID&#39;,&#39;위도&#39;,&#39;경도&#39;,&#39;거치대수&#39;,&#39;difference&#39;]]
+df3 = rental_office[rental_office[&#39;compare_rental&#39;] == 2][[&#39;대여소명&#39;,&#39;대여소ID&#39;,&#39;위도&#39;,&#39;경도&#39;,&#39;거치대수&#39;,&#39;difference&#39;]]</code></pre>
+<pre class="python"><code>for i in df1.index:
+    a = (df1.loc[i,&#39;difference&#39;] - df1[&#39;difference&#39;].mean())/df1[&#39;difference&#39;].std()
+    df1.loc[i,&#39;difference&#39;] = a</code></pre>
+<pre class="python"><code>for i in df2.index:
+    a = (df2.loc[i,&#39;difference&#39;] - df2[&#39;difference&#39;].mean())/df2[&#39;difference&#39;].std()
+    df2.loc[i,&#39;difference&#39;] = a</code></pre>
+<ul>
+<li>대여소별 대여 건수와 반납 건수를 비교하여, 반납 건수가 많은 지역은 파란색 대여 건수가 많은 지역은 빨간색으로 표시하였다. 원의 크기는 반납 건수와 대여 건수의 차이를 표준화하여절댓값이 클수록 크게 표시하였다</li>
+</ul>
+<pre class="python"><code>for item in df1.index:
+    lat = df1.loc[item,&#39;위도&#39;]
+    long = df1.loc[item,&#39;경도&#39;]
+    folium.CircleMarker([lat,long],
+                       radius = df1.loc[item,&#39;difference&#39;],
+                       popup = df1.loc[item,&#39;대여소명&#39;],
+                       color = &#39;blue&#39;,
+                       fill = True).add_to(map_osm)</code></pre>
+<pre class="python"><code>for item in df2.index:
+    lat = df2.loc[item,&#39;위도&#39;]
+    long = df2.loc[item,&#39;경도&#39;]
+    folium.CircleMarker([lat,long],
+                       radius = df2.loc[item,&#39;difference&#39;],
+                       popup = df2.loc[item,&#39;대여소명&#39;],
+                       color = &#39;red&#39;,
+                       fill = True).add_to(map_osm)</code></pre>
+<pre class="python"><code>map_osm</code></pre>
+<ul>
+<li>서울특별시공공자전거 대여 이력을 통해 이용자가 자전거를 대여시 잔여 자전거 수가 2대 이하인 사건을 구한다</li>
+</ul>
+<pre class="python"><code>a = rental_info[rental_info[&#39;대여거치대&#39;]&lt;=2][[&#39;대여 대여소번호&#39;,&#39;대여거치대&#39;]]
+a = a[&#39;대여 대여소번호&#39;].value_counts()
+a = pd.DataFrame(a)
+a.reset_index(inplace=True)
+a.rename(columns={&#39;index&#39;:&#39;대여소ID&#39;,&#39;대여 대여소번호&#39;:&#39;횟수&#39;},inplace=True)
+a.head()</code></pre>
+<pre class="python"><code>df = pd.merge(a,long_lat,how=&#39;left&#39;,on=&#39;대여소ID&#39;)
+df.dropna(inplace=True)
+df = df.head(10)
+df</code></pre>
+<pre class="python"><code>map_osm4 = folium.Map(location=[37.5502, 126.982],zoom_start=12)
+for item in df.index:
+    lat = df.loc[item,&#39;위도&#39;]
+    long = df.loc[item,&#39;경도&#39;]
+    folium.Marker([lat,long]).add_to(map_osm4)
+map_osm4</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
