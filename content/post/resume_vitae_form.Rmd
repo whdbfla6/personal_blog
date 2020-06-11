@@ -1,0 +1,69 @@
+---
+name: 조유림
+position: "학생"
+date: "`r format(Sys.time(), '%6 %2020')`"
+email: "whdbfla6@gmail.com"
+github: whdbfla6
+instagram: yoorim077
+header-includes:
+  - \usepackage{kotex}
+
+output:
+  vitae::hyndman:
+    pdf_document:
+      latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+# 학력
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution,
+  "문헌정보학과", "2016-2020(졸업예정)", "연세대학교(서울)",
+  "응용통계학과", "2017(복수전공승인)-2020", "연세대학교(서울)",
+  "응용통계학과 석사", "2021(입학예정)", "연세대학교(서울)",
+) %>% 
+  detailed_entries(Degree, Year, Institution)
+```
+
+# 활동
+
+```{r}
+tribble(
+  ~Activities, ~Year, ~Content,
+  "중앙새내기맞이단", "2016.7-2017.6", "연세대학교 새내기를 위한 겨울방학 비정모/정모 프로그램 기획 및 수시 응원",
+  "도서관 희망원정대 봉사(40시간)","2017-7", "도서관 이용자 교육 및 도서 분류",
+  "전공 알리미 봉사(33시간)","2017","고등학교를 방문해 문헌정보학과 진학을 희망하는 학생들에게 전공 설명 "
+) %>% 
+  detailed_entries(Activities, Year, Content)
+```
+
+# 프로젝트
+
+```{r}
+tribble(
+  ~Project, ~Year, ~Content,
+  "Project Casa", "2020.4-present", "서울 아파트 가격 예측하는 시스템 구축 / EDA파트 담당",
+  "Web Interface Problems Analysis","2017.3-2017.6", "중경고등학교 홈페이지를 이용자의 관점에서 인터페이스 분석",
+  "Database Construction","2018.3-2018.6","마이크로소프트 Access를 이용해 드라마 어플리케이션에 사용될 DB구축"
+) %>% 
+  detailed_entries(Project, Year, Content)
+```
+
+# 수상
+
+```{r}
+tribble(
+  ~Year, ~Content,
+  "2017.3", "학업우수상",
+) %>%
+  detailed_entries(Year, Content)
+```
+
+
