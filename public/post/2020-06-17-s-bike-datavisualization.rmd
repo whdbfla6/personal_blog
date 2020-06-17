@@ -290,7 +290,7 @@ for item in df2.index:
                        fill = True).add_to(map_osm)
 ```
 
-![png](data/map1.png)
+![png](https://focused-elion-b6663c.netlify.app/data/map1.png)
 
 - 자치구별 대여건수가 많은 경우 짙은 농도의 빨간색으로 표시를 하는 등 색의 농도에 따라 시각화 하였다. 파란색 원은 반납건수가 많은 장소 빨간색 원은 대여건수가 더 많은 장소를 나타내며, 반납건수와 대여건수의 차이가 많이 나는 지역은 원의 크기를 크게 하여 시각화하였다
 
@@ -332,7 +332,7 @@ for item in sort_df2.index:
     folium.Marker([lat,long],popup = sort_df2.loc[item,'대여소명'], icon=folium.Icon(color='red')).add_to(map_osm2)
 ```
 
-![png](data/map2.png)
+![png](https://focused-elion-b6663c.netlify.app/data/map2.png)
 
 ### 2. 자전거의 수가 부족한 대여소
 
@@ -447,7 +447,7 @@ for item in df.index:
     folium.Marker([lat,long],popup = df.loc[item,'대여소명'], icon=folium.Icon(color='red',icon='star')).add_to(map_osm3)
 ```
 
-![png](data/map3.png)
+![png](https://focused-elion-b6663c.netlify.app/data/map3.png)
 
 ### 3. 이용자 이동경로 패턴
 
@@ -674,7 +674,7 @@ for item in a.index:
     long = a.loc[item,'대여경도']
     folium.Marker([lat,long],popup = a.loc[item,'대여대여소'], icon=folium.Icon(color='purple',icon='star')).add_to(map_osm4)
 ```
-![png](data/map4.png)
+![png](https://focused-elion-b6663c.netlify.app/DATA/map4.png)
 
 
 

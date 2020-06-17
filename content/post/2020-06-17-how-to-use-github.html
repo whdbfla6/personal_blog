@@ -1,0 +1,104 @@
+---
+title: how to use github
+author: ~
+date: '2020-06-17'
+slug: how-to-use-github
+categories: []
+tags: []
+---
+
+
+
+<div id="들어가며" class="section level3">
+<h3>0. 들어가며</h3>
+<ul>
+<li>이번 데이터사이언스입문 수업을 들으면서 깃험을 처음 접하게 되었다. 코딩을 처음 접하는 초보자들을 위해 깃헙에 대해 소개하고자 한다</li>
+</ul>
+</div>
+<div id="깃헙이란" class="section level3">
+<h3>1. 깃헙이란?</h3>
+<ul>
+<li>깃헙에 대해 알기에 앞서 git이 무엇인지 알아야한다.</li>
+<li>깃은 버전 관리 시스템으로, 같은 파일을 다수의 사람이 동시에 작업하는 것을 가능하도록 하며, 과거에 작성한 코드 확인이 가능하다</li>
+<li>깃헙은</li>
+</ul>
+</div>
+<div id="깃헙을-이용한-협업" class="section level3">
+<h3>2. 깃헙을 이용한 협업</h3>
+<div id="저장소" class="section level4">
+<h4>1) 저장소</h4>
+<div id="원격-저장소" class="section level5">
+<h5>원격 저장소</h5>
+<ol style="list-style-type: decimal">
+<li><p>중앙 원격 저장소 : 여러명이 관리하는 프로젝트의 중심이 되는 저장소</p></li>
+<li><p>개인 원격 저장소 : 중앙 원격 저장소를 fork를 떠서 개인이 관리할 수 있는 저장소</p></li>
+</ol>
+</div>
+<div id="로컬-저장소" class="section level5">
+<h5>로컬 저장소</h5>
+<ol style="list-style-type: decimal">
+<li>내 pc에 저장해서 관리하는 개인 전용 저장소</li>
+</ol>
+</div>
+</div>
+<div id="일반적인-협업-흐름" class="section level4">
+<h4>2) 일반적인 협업 흐름</h4>
+<div id="remote-저장소를-fork를-떠서-개인-원격-저장소를-만든다" class="section level5">
+<h5>1. remote 저장소를 fork를 떠서 개인 원격 저장소를 만든다</h5>
+<div class="figure">
+<img src="pics/git_1.PNG" alt="" />
+<p class="caption">fork</p>
+</div>
+<ul>
+<li>fork를 눌러 개인 원격 저장소를 생성할 수 있다</li>
+</ul>
+<div class="figure">
+<img src="pics/git_2.PNG" alt="" />
+<p class="caption">중앙원격저장소</p>
+</div>
+<div class="figure">
+<img src="pics/git_3.PNG" alt="" />
+<p class="caption">개인원격저장소</p>
+</div>
+</div>
+<div id="개인-원격-저장소를-본인의-컴퓨터에-복제하여-작업을-한다" class="section level5">
+<h5>2. 개인 원격 저장소를 본인의 컴퓨터에 복제하여 작업을 한다</h5>
+<pre><code>$ git clone 개인 원격 저장소 주소 </code></pre>
+<p>개인 원격 저장소 주소는 clone or download를 누르면 확인할 수 있다</p>
+<div class="figure">
+<img src="pics/git_4.PNG" alt="" />
+<p class="caption">clone&amp;download</p>
+</div>
+<ul>
+<li>다른 사람이 중앙 원격소에 코드 내용을 업로드하는 경우, 그 내용 또한 내 로컬 저장소에 가져와야 한다.</li>
+</ul>
+<pre><code>$git add remote upstream 중앙 원격 저장소 주소 #중앙 원격 저장소를 지정
+$git pull upstream master #코드 merge</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>작업 후 다시 개인 원격 조장소에 코드를 업로드한다(PUSH)</li>
+</ol>
+<pre><code>$git status</code></pre>
+<p>이 명령어를 통해 본인이 수정한 코드 파일이 무엇인지 확인이 가능하다</p>
+<div class="figure">
+<img src="pics/git_5.PNG" alt="" />
+<p class="caption">git status</p>
+</div>
+<p>이 수많은 파일들 중 개인 원격 저장소에 업로드할 파일을 선택한다</p>
+<ul>
+<li>수정한 모든 파일을 업로드할 경우</li>
+</ul>
+<pre><code>$ git add .</code></pre>
+<ul>
+<li>일부 파일을 업로드 할 경우</li>
+</ul>
+<pre><code>$ git add 파일명</code></pre>
+<p>코드 변경사항에 대해 comment를 달아준다</p>
+<pre><code>$ git commit -m &quot;변경사항&quot;</code></pre>
+<p>로컬 저장소의 수정된 코드를 개인 중앙 원격소에 업로드한다(push)</p>
+<pre><code>$ git push origin master</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>개인 원격 저장소의 바뀐 코드 내용을 pull request를 통해 중앙 원격 저장소에 merge한다(PULL REQUEST)</li>
+</ol>
+</div>
+</div>
+</div>

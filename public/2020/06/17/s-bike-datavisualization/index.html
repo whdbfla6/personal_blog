@@ -449,7 +449,7 @@ map_osm = folium.Map(location=[37.5502, 126.982],tiles=&#39;cartodbpositron&#39;
                         fill_color=&#39;red&#39;,
                        fill = True).add_to(map_osm)</code></pre>
 <div class="figure">
-<img src="DATA/map1.PNG" alt="" />
+<img src="https://focused-elion-b6663c.netlify.app/data/map1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <ul>
@@ -478,7 +478,7 @@ sort_df2.head()
     long = sort_df2.loc[item,&#39;경도&#39;]
     folium.Marker([lat,long],popup = sort_df2.loc[item,&#39;대여소명&#39;], icon=folium.Icon(color=&#39;red&#39;)).add_to(map_osm2)</code></pre>
 <div class="figure">
-<img src="DATA/map2.PNG" alt="" />
+<img src="https://focused-elion-b6663c.netlify.app/data/map2.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -640,7 +640,7 @@ df = df.head(10)</code></pre>
     long = df.loc[item,&#39;경도&#39;]
     folium.Marker([lat,long],popup = df.loc[item,&#39;대여소명&#39;], icon=folium.Icon(color=&#39;red&#39;,icon=&#39;star&#39;)).add_to(map_osm3)</code></pre>
 <div class="figure">
-<img src="DATA/map3.PNG" alt="" />
+<img src="https://focused-elion-b6663c.netlify.app/data/map3.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -965,7 +965,7 @@ data = data[data[&#39;대여 대여소번호&#39;]!=data[&#39;반납대여소번
     long = a.loc[item,&#39;대여경도&#39;]
     folium.Marker([lat,long],popup = a.loc[item,&#39;대여대여소&#39;], icon=folium.Icon(color=&#39;purple&#39;,icon=&#39;star&#39;)).add_to(map_osm4)</code></pre>
 <div class="figure">
-<img src="DATA/map4.PNG" alt="" />
+<img src="https://focused-elion-b6663c.netlify.app/DATA/map4.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
