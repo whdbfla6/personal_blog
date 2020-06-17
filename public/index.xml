@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>apartment_price_prediction_EDA</title>
+      <link>/2020/06/17/apartment-price-prediction-eda/</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/17/apartment-price-prediction-eda/</guid>
+      <description>1. 분석을 위한 기본적인 데이터 전처리1) 분석에 용이하도록 object 변수 변환학교 학생수를 숫자형으로 변환area에서 숫자가 아닌 부분 제거’school_addr_town’에서 ~길의 내용을 제거하고 ~로까지 확인한다df[&amp;#39;school_students&amp;#39;] = pd.to_numeric(df[&amp;#39;school_students&amp;#39;])# area에서 숫자가 아닌 부분을 제거해준다 import redf[&amp;#39;area&amp;#39;] = df[&amp;#39;area&amp;#39;].apply(lambda x: int(re.split(&amp;#39;\D&amp;#39;,x)[0]))import redf[&amp;#39;school_addr_town&amp;#39;] = df[&amp;#39;school_addr_town&amp;#39;].apply(lambda x: re.split(&amp;#39;\d&amp;#39;,x)[0])df[&amp;#39;school_addr_town&amp;#39;] = df[&amp;#39;school_addr_town&amp;#39;].apply(lambda x: x.replace(&amp;#39;로&amp;#39;,&amp;#39;동&amp;#39;))2) null값 확인학교 학생수에 null값이 발생하였고, 0의 값으로 대체df = df.</description>
+    </item>
+    
+    <item>
       <title>S-bike-datavisualization</title>
       <link>/2020/06/17/s-bike-datavisualization/</link>
       <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
