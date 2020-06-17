@@ -99,6 +99,24 @@
 <h4>코드</h4>
 <pre class="python"><code>import pandas_profiling</code></pre>
 <pre class="python"><code>pandas_profiling.ProfileReport(data)</code></pre>
+<ul>
+<li>결과물을 html로 저장하는 방법</li>
+</ul>
+<pre class="python"><code>profile = ProfileReport(data)
+profile.to_file(&quot;output.html&quot;)</code></pre>
+</div>
+<div id="결과물" class="section level4">
+<h4>결과물</h4>
+<ul>
+<li>변수별 특징, 결측값, 변수별 상관관계 등에 대한 정보를 하나의 보고서 형태로 출력해준다
+<img src="https://focused-elion-b6663c.netlify.app/pics/pp1.png" alt="png" />
+<img src="https://focused-elion-b6663c.netlify.app/pics/pp2.png" alt="png" />
+<img src="https://focused-elion-b6663c.netlify.app/pics/pp3.png" alt="png" /></li>
+</ul>
+<div class="figure">
+<img src="https://focused-elion-b6663c.netlify.app/pics/pp4.png" alt="" />
+<p class="caption">png</p>
+</div>
 </div>
 </div>
 <div id="error-해결법" class="section level3">
@@ -110,11 +128,13 @@
 <p>pandas 1.0이상의 버전에서 join_axes의 코드가 삭제되었기 때문에 발생하는 문제이다</p>
 <p>우선 본인의 pandas 버전을 확인해본다</p>
 <pre class="python"><code>pandas.showversion()</code></pre>
-<p>pandas의 버전이 1.0이상인 경우, pandas 0.25.0의 버전으로 낮춰준다</p>
+<p>pandas의 버전이 1.0이상인 경우, pandas 0.25.0의 버전으로 다시 설치한다</p>
 <pre><code>$ pip install pandas==0.25.0</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>c++ visual studio 설치후 다시 업그레이드</li>
+<li>c++ visual studio 설치
+<a href="%22https://visualstudio.microsoft.com/ko/downloads/%22">visual studio</a></li>
 </ol>
+<p>위 홈페이지에서 ’c++를 사용한 데스크톱 개발’을 설치하고 pip을 이용해 pandas profile을 설치한다</p>
 </div>
 
     </div>

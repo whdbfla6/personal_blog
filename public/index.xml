@@ -27,8 +27,7 @@
       <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/17/eda-profilingtool/</guid>
-      <description>1. pandas-profilingpandas profiling은 수많은 양의 데이터에 대한 EDA를 하나의 보고서 형태로 만들어주는 패키지이다설치 방법pip사용pip install pandas-profiling[notebook]github에서 최신 버전 다운로드pip install https://github.com/pandas-profiling/pandas-profiling/archive/master.zipcondaconda install -c conda-forge pandas-profiling코드import pandas_profilingpandas_profiling.ProfileReport(data)2. error 해결법설치를 다 완료하였음에도 오류가 발생하는 경우가 있다.
-TypeError: concat() got an unexpected keyword argument ’join_axes&#34;pandas 1.0이상의 버전에서 join_axes의 코드가 삭제되었기 때문에 발생하는 문제이다</description>
+      <description>1. pandas-profilingpandas profiling은 수많은 양의 데이터에 대한 EDA를 하나의 보고서 형태로 만들어주는 패키지이다설치 방법pip사용pip install pandas-profiling[notebook]github에서 최신 버전 다운로드pip install https://github.com/pandas-profiling/pandas-profiling/archive/master.zipcondaconda install -c conda-forge pandas-profiling코드import pandas_profilingpandas_profiling.ProfileReport(data)결과물을 html로 저장하는 방법profile = ProfileReport(data)profile.to_file(&amp;quot;output.html&amp;quot;)결과물변수별 특징, 결측값, 변수별 상관관계 등에 대한 정보를 하나의 보고서 형태로 출력해준다png</description>
     </item>
     
     <item>
