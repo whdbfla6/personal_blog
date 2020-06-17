@@ -6,46 +6,19 @@
     <description>Recent content on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>project_Casa_eda_WithResult</title>
-      <link>/2020/06/09/project-casa-eda-withresult/</link>
-      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      <title>S-bike-datavisualization</title>
+      <link>/2020/06/17/s-bike-datavisualization/</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/06/09/project-casa-eda-withresult/</guid>
-      <description>0. &amp;#46308;&amp;#50612;&amp;#44032;&amp;#47728;&amp;#182;이 게시글은 서울 아파트 실거래가 예측 시스템을 구축하는 프로젝트에서 EDA파트를 담고 있다1. EDA&amp;#50640; &amp;#54596;&amp;#50836;&amp;#54620; &amp;#46972;&amp;#51060;&amp;#48652;&amp;#47084;&amp;#47532;&amp;#182;In&amp;nbsp;[1]:import pandas as pdimport jsonimport psycopg2import numpy as npimport matplotlib.pyplot as pltimport seaborn as sns%matplotlib inlineimport warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)2. &amp;#45936;&amp;#51060;&amp;#53552;&amp;#54532;&amp;#47112;&amp;#51076; &amp;#48520;&amp;#47084;&amp;#50724;&amp;#44592;&amp;#182;In&amp;nbsp;[2]:def call_df(table_name):with open(&amp;#39;config.json&amp;#39;, &amp;#39;r&amp;#39;) as f:config = json.</description>
-    </item>
-    
-    <item>
-      <title>따릉이_data_Visualization_with_Result</title>
-      <link>/2020/06/09/data-visualization/</link>
-      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/06/09/data-visualization/</guid>
-      <description>information_visualization/*!** Twitter Bootstrap**//*!* Bootstrap v3.3.7 (http://getbootstrap.com)* Copyright 2011-2016 Twitter, Inc.* Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html {font-family: sans-serif;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}body {margin: 0;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {display: block;}audio,canvas,progress,video {display: inline-block;vertical-align: baseline;}audio:not([controls]) {display: none;height: 0;}[hidden],template {display: none;}a {background-color: transparent;}a:active,a:hover {outline: 0;}abbr[title] {border-bottom: 1px dotted;}b,strong {font-weight: bold;}dfn {font-style: italic;}h1 {font-size: 2em;margin: 0.</description>
-    </item>
-    
-    <item>
-      <title>data_Visualization</title>
-      <link>/2020/06/06/data-visualization/</link>
-      <pubDate>Sat, 06 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/06/06/data-visualization/</guid>
+      <guid>/2020/06/17/s-bike-datavisualization/</guid>
       <description>주제서울 자전거(따릉이)는누구나 편리하게 사용할 수 있는 무인 자전거 대여 시스템으로, 교통체증과 대기오염의문제를 해결하기 위해 마련되었다. 본인은 서울시 공공자전거 대여소별 반납 건수와 대여 건수를 비교하여 수요를 파악하고자 한다. 이는 해당 대여소의 자전거와 거치대 수의 확대 여부에 대한 의사결정에 도움이 될 것으로 판단된다.데이터서울 열린 데이터 광장 [https://data.seoul.go.kr/] 데이터를 사용하였다.
 시각화 내용1. 각 대여소별 2018년6월의 대여 건수와 반납 건수 비교 (2019년자료가없어 최신 데이터를 사용하지 못하였다)서울 열린 데이터 광장에서 제공하고 있는 서울 자전거 관련 공공데이터를이용해 시각화를 진행하였다.</description>
-    </item>
-    
-    <item>
-      <title>projectCASA_EDA</title>
-      <link>/2020/06/06/projectcasa-eda/</link>
-      <pubDate>Sat, 06 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/06/06/projectcasa-eda/</guid>
-      <description>0. 들어가며이 게시글은 서울 아파트 실거래가 예측 시스템을 구축하는 프로젝트에서 EDA파트를 담고 있다.1. EDA에 필요한 라이브러리import pandas as pdimport jsonimport psycopg2import numpy as npimport matplotlib.pyplot as pltimport seaborn as sns%matplotlib inlineimport warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)2. 데이터프레임 불러오기def call_df(table_name):with open(&amp;#39;config.json&amp;#39;, &amp;#39;r&amp;#39;) as f:config = json.load(f)conn = psycopg2.connect(user = config[&amp;#39;USER&amp;#39;],password = config[&amp;#39;PASSWORD&amp;#39;],host = config[&amp;#39;HOST&amp;#39;],port = config[&amp;#39;PORT&amp;#39;],database = config[&amp;#39;DATABASE&amp;#39;])sql = f&amp;#39;SELECT * FROM {table_name}&amp;#39;df = pd.</description>
     </item>
     
     <item>
@@ -64,6 +37,15 @@
       
       <guid>/about/</guid>
       <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/1/01/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/1/01/01/</guid>
+      <description>학력활동프로젝트수상</description>
     </item>
     
   </channel>

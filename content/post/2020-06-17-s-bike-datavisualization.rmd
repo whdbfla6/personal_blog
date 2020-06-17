@@ -1,0 +1,679 @@
+---
+title: S-bike-datavisualization
+author: ~
+date: '2020-06-17'
+slug: s-bike-datavisualization
+categories: []
+tags: []
+---
+
+### 주제 
+- 서울 자전거(따릉이)는누구나 편리하게 사용할 수 있는 무인 자전거 대여 시스템으로, 교통체증과 대기오염의문제를 해결하기 위해 마련되었다. 본인은 서울시 공공자전거 대여소별 반납 건수와 대여 건수를 비교하여 수요를 파악하고자 한다. 이는 해당 대여소의 자전거와 거치대 수의 확대 여부에 대한 의사결정에 도움이 될 것으로 판단된다.
+
+### 데이터
+서울 열린 데이터 광장 [https://data.seoul.go.kr/] 데이터를 사용하였다.
+
+### 시각화 내용
+#### 1. 각 대여소별 2018년6월의 대여 건수와 반납 건수 비교 (2019년자료가없어 최신 데이터를 사용하지 못하였다)
+서울 열린 데이터 광장에서 제공하고 있는 서울 자전거 관련 공공데이터를이용해 시각화를 진행하였다. 대여소별 대여 건수와 반납 건수를 비교하여, 반납 건수가 많은 지역은 파란색 대여 건수가 많은 지역은 빨간색으로 표시하였다. 원의 크기는 반납 건수와 대여 건수의 차이를 표준화하여 절댓값이 클수록 크게 표시하였다.또 자치구별로 대여건수가 반납건수보다 많은 사건의 수를 구해서 그 값에 따라 색의 농도에 변화를 주어 시각화하였다.
+
+#### 2. 자전거의 수가 부족한 대여소 
+서울특별시공공자전거 대여 이력을 통해 이용자가 자전거를 대여시 잔여 자전거 수가 2대 이하인 사건을 구하였다. 그리고 해당 사건이 빈번하게 발생한 대여소 상위 10군데를위도와 경도를 통해 시각화하였다.
+
+#### 3. 이용자 이동경로 패턴
+대여 이력을 통해 이용자들의 주된 이동경로 상위 20곳을 뽑아 시각화하였다 
+
+### 시각화 방법
+- 파이썬 folium 시각화 패키지를 이용하여 지도에 시각화하였다
+
+
+- 필요한 패키지를 불러온다
+
+```python
+import pandas as pd
+import seaborn as sns
+import folium
+```
+
+- 데이터는 크게 3가지를 사용: 이용자 대여이력, 대여소 위치 정보, 대여소 별 대여정보
+
+```python
+rental_info.head() #이용자 대여이력
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>자전거번호</th>
+      <th>대여일시</th>
+      <th>대여 대여소번호</th>
+      <th>대여 대여소명</th>
+      <th>대여거치대</th>
+      <th>반납일시</th>
+      <th>반납대여소번호</th>
+      <th>반납대여소명</th>
+      <th>반납거치대</th>
+      <th>이용시간</th>
+      <th>이용거리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPB-04392</td>
+      <td>2019-11-28 23:07</td>
+      <td>2377</td>
+      <td>수서역 5번출구 뒤</td>
+      <td>9</td>
+      <td>2019-11-28 23:18</td>
+      <td>1203</td>
+      <td>밀리아나2빌딩 앞</td>
+      <td>5</td>
+      <td>11</td>
+      <td>1980</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+```python
+rental_office_info.head() #대여소 위치 정보,
+```
+```python
+rental_office_rental_info.head() #대여소 별 대여정보
+```
+
+### 1.각 대여소별 2018년6월의 대여 건수와 반납 건수 비교 (2019년자료가없어 최신 데이터를 사용하지 못하였다)
+
+```python
+rental_office_rental_info = rental_office_rental_info[rental_office_rental_info['대여일자']==201806]
+```
+
+- 대여소 별 위도/경도 dataframe과 대여/반납건수 dataframe을 merge해준다
+```python
+rental_office = pd.merge(rental_office_info,rental_office_rental_info,how='left',left_on='대여소ID',right_on='대여소번호')
+rental_office = rental_office.dropna()
+rental_office = rental_office.drop('대여소번호',axis=1)
+rental_office.head()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>대여소_구</th>
+      <th>대여소ID</th>
+      <th>대여소명</th>
+      <th>위도</th>
+      <th>경도</th>
+      <th>거치대수</th>
+      <th>대여건수</th>
+      <th>반납건수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>마포구</td>
+      <td>101.0</td>
+      <td>101. (구)합정동 주민센터</td>
+      <td>37.549561</td>
+      <td>126.905754</td>
+      <td>5</td>
+      <td>832.0</td>
+      <td>807.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+- 반납건수가 더 많은 경우 0 대여건수가 더 많은 경우 1 동일한 값을 갖는 경우는 2을 출력한다.
+
+
+```python
+def num(x):
+    if x['대여건수'] < x['반납건수']: # 반납건수가 많은 경우
+         return 0
+    if x['대여건수'] > x['반납건수']: # 대여건수가 많은 경우 
+         return 1
+    else: return 2 # 반납건수와 대여건수가 동일한 경우 
+```
+
+- 반납건수와 대여건수의 차이를 구해주고, -1과 1사이의 값으로 표준화해줌
+
+```python
+def diff(x):
+    return abs(x['대여건수']-x['반납건수'])    #반납건수와 대여건수의 차이 
+```
+
+
+```python
+rental_office['compare_rental'] = rental_office.apply(lambda x: num(x),axis=1)
+rental_office['difference'] = rental_office.apply(lambda x: diff(x),axis=1)
+```
+
+
+```python
+for i in rental_office.index: 
+    a = (rental_office.loc[i,'difference'] - rental_office['difference'].mean())/rental_office['difference'].std()
+    rental_office.loc[i,'difference'] = a
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+    <tr>
+      <th></th>
+      <th>대여소_구</th>
+      <th>대여소ID</th>
+      <th>대여소명</th>
+      <th>위도</th>
+      <th>경도</th>
+      <th>거치대수</th>
+      <th>대여건수</th>
+      <th>반납건수</th>
+      <th>compare_rental</th>
+      <th>difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>마포구</td>
+      <td>101.0</td>
+      <td>101. (구)합정동 주민센터</td>
+      <td>37.549561</td>
+      <td>126.905754</td>
+      <td>5</td>
+      <td>832.0</td>
+      <td>807.0</td>
+      <td>1</td>
+      <td>-0.566501</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+- 각 자치구별로 대여건수가 반납건수가 많은 대여소의 수를 구하였다
+
+
+```python
+a = df1.groupby('대여소_구').count()['대여소명'].reset_index()
+a.rename(columns={'대여소명':'횟수'},inplace=True)
+a.head()
+```
+```python
+import json
+import warnings
+warnings.filterwarnings('ignore')
+
+path = 'seoul_district.json'
+geo = json.load(open(path,encoding='utf-8'))
+```
+
+```python
+bins = list(a['횟수'].quantile([0,0.25,0.5,0.75,1]))
+map_osm = folium.Map(location=[37.5502, 126.982],tiles='cartodbpositron',zoom_start=12)
+```
+
+
+```python
+folium.Choropleth(geo_data=geo, data=a,columns=['대여소_구','횟수'],fill_color ='PuRd',key_on="feature.id"
+                   ,bins=bins,reset=True).add_to(map_osm)
+```
+
+```python
+for item in df1.index:
+    lat = df1.loc[item,'위도']
+    long = df1.loc[item,'경도']
+    folium.CircleMarker([lat,long],
+                       radius = df1.loc[item,'difference'],
+                       color = 'white',
+                        fill_opacity=0.6,
+                        fill_color='blue', 
+                       fill = True).add_to(map_osm)
+```
+
+```python
+for item in df2.index:
+    lat = df2.loc[item,'위도']
+    long = df2.loc[item,'경도']
+    folium.CircleMarker([lat,long],
+                       radius = df2.loc[item,'difference'],
+                        color = 'white',
+                        fill_opacity=0.6,
+                        fill_color='red',
+                       fill = True).add_to(map_osm)
+```
+
+![png](data/map1.png)
+
+- 자치구별 대여건수가 많은 경우 짙은 농도의 빨간색으로 표시를 하는 등 색의 농도에 따라 시각화 하였다. 파란색 원은 반납건수가 많은 장소 빨간색 원은 대여건수가 더 많은 장소를 나타내며, 반납건수와 대여건수의 차이가 많이 나는 지역은 원의 크기를 크게 하여 시각화하였다
+
+### 1-2 대여건수가 많은 상위 10곳, 반납건수가 많은 상위 10곳
+
+```python
+sort_df1 = df1.sort_values(by='difference',ascending=False)
+sort_df1.dropna(inplace=True)
+sort_df1 = sort_df1.head(10)
+sort_df1.head()
+#반납건수가 더 많은 상위 10군데 
+```
+
+```python
+sort_df2 = df2.sort_values(by='difference',ascending=False)
+sort_df2.dropna(inplace=True)
+sort_df2 = sort_df2.head(10)
+sort_df2.head()
+#대여건수가 더 많은 상위 10군데 
+```
+
+```python
+map_osm2 = folium.Map(location=[37.5502, 126.982],zoom_start=12)
+```
+
+
+```python
+for item in sort_df1.index:
+    lat = sort_df1.loc[item,'위도']
+    long = sort_df1.loc[item,'경도']
+    folium.Marker([lat,long],popup = sort_df1.loc[item,'대여소명'], icon=folium.Icon(color='blue')).add_to(map_osm2)
+```
+
+
+```python
+for item in sort_df2.index:
+    lat = sort_df2.loc[item,'위도']
+    long = sort_df2.loc[item,'경도']
+    folium.Marker([lat,long],popup = sort_df2.loc[item,'대여소명'], icon=folium.Icon(color='red')).add_to(map_osm2)
+```
+
+![png](data/map2.png)
+
+### 2. 자전거의 수가 부족한 대여소
+
+- 이용자 대여이력 데이터에서 이용자가 자전거를 대여하려할 때 잔여 자전거가 2대 이하인 사건을 구하였다
+
+```python
+temp = rental_info[rental_info['대여거치대']<=2][['대여 대여소번호','대여거치대']]
+temp = temp['대여 대여소번호'].value_counts()
+temp = pd.DataFrame(temp)
+temp.reset_index(inplace=True)
+temp.rename(columns={'index':'대여소ID','대여 대여소번호':'횟수'},inplace=True)
+temp.head()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>대여소ID</th>
+      <th>횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1211</td>
+      <td>884</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2183</td>
+      <td>856</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1911</td>
+      <td>721</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1616</td>
+      <td>697</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1251</td>
+      <td>624</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+- 여기서 횟수는 각 대여소별로 해당 사건이 발생한 수이며, 내림차순으로 정렬해 상위 10개의 지역을 선택하였다
+
+
+```python
+df = pd.merge(temp,long_lat,how='left',on='대여소ID')
+df.dropna(inplace=True)
+df = df.head(10)
+```
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>대여소ID</th>
+      <th>횟수</th>
+      <th>대여소명</th>
+      <th>위도</th>
+      <th>경도</th>
+    </tr>
+  </thead>
+   <tbody>
+    <tr>
+      <th>0</th>
+      <td>1211</td>
+      <td>884</td>
+      <td>1211. 방이삼거리</td>
+      <td>37.512104</td>
+      <td>127.107780</td>
+    </tr>
+  </tbody>
+ </table>
+</div>
+
+
+
+```python
+map_osm3 = folium.Map(location=[37.5502, 126.982],zoom_start=12)
+```
+
+
+```python
+for item in df.index:
+    lat = df.loc[item,'위도']
+    long = df.loc[item,'경도']
+    folium.Marker([lat,long],popup = df.loc[item,'대여소명'], icon=folium.Icon(color='red',icon='star')).add_to(map_osm3)
+```
+
+![png](data/map3.png)
+
+### 3. 이용자 이동경로 패턴
+
+
+```python
+df = pd.merge(rental_info,long_lat,how='left',left_on='대여 대여소번호',right_on='대여소ID')
+df.rename(columns={'위도':'대여위도','경도':'대여경도'},inplace=True)
+df.drop('대여소ID',axis=1,inplace=True)
+```
+
+
+```python
+temp = pd.merge(df.drop(['대여위도','대여경도'],axis=1),long_lat,how='inner',left_on='반납대여소번호',right_on='대여소ID')
+temp.drop(['대여소명_x','대여소ID','대여소명_y'],axis=1,inplace=True)
+temp.rename(columns={'위도':'반납위도','경도':'반납경도'},inplace=True)
+```
+
+
+```python
+temp[['대여위도','대여경도']] = df[['대여위도','대여경도']]
+temp.dropna(inplace=True)
+```
+- 각 대여소별 위치 정보 데이터와 대여이력 데이터를 병합하였다
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>자전거번호</th>
+      <th>대여일시</th>
+      <th>대여 대여소번호</th>
+      <th>대여 대여소명</th>
+      <th>대여거치대</th>
+      <th>반납일시</th>
+      <th>반납대여소번호</th>
+      <th>반납대여소명</th>
+      <th>반납거치대</th>
+      <th>이용시간</th>
+      <th>이용거리</th>
+      <th>반납위도</th>
+      <th>반납경도</th>
+      <th>대여위도</th>
+      <th>대여경도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPB-04392</td>
+      <td>2019-11-28 23:07</td>
+      <td>2377</td>
+      <td>수서역 5번출구 뒤</td>
+      <td>9</td>
+      <td>2019-11-28 23:18</td>
+      <td>1203</td>
+      <td>밀리아나2빌딩 앞</td>
+      <td>5</td>
+      <td>11</td>
+      <td>1980</td>
+      <td>37.493729</td>
+      <td>127.120621</td>
+      <td>37.486835</td>
+      <td>127.102753</td>
+    </tr>
+     <tr>
+      <th>1</th>
+      <td>SPB-11498</td>
+      <td>2019-11-29 0:04</td>
+      <td>1256</td>
+      <td>문정현대아파트 교차로</td>
+      <td>6</td>
+      <td>2019-11-29 0:11</td>
+      <td>1203</td>
+      <td>밀리아나2빌딩 앞</td>
+      <td>14</td>
+      <td>6</td>
+      <td>800</td>
+      <td>37.493729</td>
+      <td>127.120621</td>
+      <td>37.491131</td>
+      <td>127.125809</td>
+    </tr>
+  </tbody>
+ </table>
+</div>
+
+- 대여장소와 반납장소에 따라 데이터를 groupby하여 이동 경로 별 발생 횟수를 구하였다. A에서 대여를 하고, B에서 반납을 하였을 경우 이는 하나의 이동경로이며, 각 이동경로의 빈도수를 측정한 것이다.
+
+```python
+route = temp.groupby(['대여 대여소번호','반납대여소번호']).count()['자전거번호'].reset_index()
+route.rename(columns={'자전거번호':'횟수'},inplace=True)
+route = route.sort_values(by='횟수',ascending=False)
+route = route.head(20)
+```
+
+
+```python
+df = pd.merge(route,long_lat,how='left',left_on='대여 대여소번호',right_on='대여소ID')
+df.rename(columns={'위도':'대여위도','경도':'대여경도'},inplace=True)
+df.drop('대여소ID',axis=1,inplace=True)
+```
+
+
+```python
+temp = pd.merge(df.drop(['대여위도','대여경도'],axis=1),long_lat,how='inner',left_on='반납대여소번호',right_on='대여소ID')
+temp.drop(['대여소명_x','대여소ID','대여소명_y'],axis=1,inplace=True)
+temp.rename(columns={'위도':'반납위도','경도':'반납경도'},inplace=True)
+```
+
+
+```python
+temp[['대여위도','대여경도']] = df[['대여위도','대여경도']]
+temp.dropna(inplace=True)
+```
+
+
+```python
+data = pd.merge(temp,long_lat[['대여소명','대여소ID']],how='left',left_on='대여 대여소번호',right_on='대여소ID')
+data = data.drop('대여소ID',axis=1).rename(columns={'대여소명':'대여대여소'})
+data = pd.merge(data,long_lat[['대여소명','대여소ID']],how='left',left_on='반납대여소번호',right_on='대여소ID')
+data = data.drop('대여소ID',axis=1).rename(columns={'대여소명':'반납대여소'})
+```
+
+
+```python
+a = data[data['대여 대여소번호']==data['반납대여소번호']] #대여장소와 반납장소가 다른 경우
+data = data[data['대여 대여소번호']!=data['반납대여소번호']] #대여장소와 반납장소가 동일한 경우
+```
+
+- 아래 데이터프레임에서 '횟수'는 이동 경로 별 빈도수를 나타낸다
+- 이동경로는 대여장소와 반납장소가 같은 경우와 다른 경우로 나누어 다르게 시각화를 하였다
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>대여 대여소번호</th>
+      <th>반납대여소번호</th>
+      <th>횟수</th>
+      <th>반납위도</th>
+      <th>반납경도</th>
+      <th>대여위도</th>
+      <th>대여경도</th>
+      <th>대여대여소</th>
+      <th>반납대여소</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2102</td>
+      <td>2102</td>
+      <td>382</td>
+      <td>37.484230</td>
+      <td>126.926392</td>
+      <td>37.542816</td>
+      <td>127.042084</td>
+      <td>2102. 봉림교 교통섬</td>
+      <td>2102. 봉림교 교통섬</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+```python
+map_osm4 = folium.Map(location=[37.5502, 126.982],zoom_start=12)
+```
+
+
+```python
+for item in data.index:
+    start = tuple(data[data.index==item][['대여위도','대여경도']].iloc[0])
+    end = tuple(data[data.index==item][['반납위도','반납경도']].iloc[0])
+    folium.PolyLine(
+        locations=[start,end],
+        color='blue',
+        opacity=0.6,
+        line_cap='round',
+    ).add_to(map_osm4)
+    folium.CircleMarker(
+        start,
+        popup = data.loc[item,'대여대여소'],
+        color="#000", 
+        fill_color="#ccc", fill_opacity=1, opacity=1).add_to(map_osm4)
+    folium.CircleMarker(
+        end,
+        popup = data.loc[item,'반납대여소'],
+        color="#000", 
+        fill_color="#ccc", fill_opacity=1, opacity=1).add_to(map_osm4)
+```
+
+
+```python
+for item in a.index:
+    lat = a.loc[item,'대여위도']
+    long = a.loc[item,'대여경도']
+    folium.Marker([lat,long],popup = a.loc[item,'대여대여소'], icon=folium.Icon(color='purple',icon='star')).add_to(map_osm4)
+```
+![png](data/map4.png)
+
+
+
