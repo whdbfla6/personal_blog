@@ -22,6 +22,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -70,14 +75,46 @@
       
 
 
-<div id="들어가며" class="section level3">
-<h3>0. 들어가며</h3>
-</div>
 <div id="pandas-profiling" class="section level3">
 <h3>1. pandas-profiling</h3>
+<ul>
+<li>pandas profiling은 수많은 양의 데이터에 대한 EDA를 하나의 보고서 형태로 만들어주는 패키지이다</li>
+</ul>
+<div id="설치-방법" class="section level4">
+<h4>설치 방법</h4>
+<ul>
+<li>pip사용</li>
+</ul>
+<pre><code>pip install pandas-profiling[notebook]</code></pre>
+<ul>
+<li>github에서 최신 버전 다운로드</li>
+</ul>
+<pre><code>pip install https://github.com/pandas-profiling/pandas-profiling/archive/master.zip</code></pre>
+<ul>
+<li>conda</li>
+</ul>
+<pre><code>conda install -c conda-forge pandas-profiling</code></pre>
+</div>
+<div id="코드" class="section level4">
+<h4>코드</h4>
+<pre class="python"><code>import pandas_profiling</code></pre>
+<pre class="python"><code>pandas_profiling.ProfileReport(data)</code></pre>
+</div>
 </div>
 <div id="error-해결법" class="section level3">
 <h3>2. error 해결법</h3>
+<p>설치를 다 완료하였음에도 오류가 발생하는 경우가 있다.</p>
+<ol style="list-style-type: decimal">
+<li>TypeError: concat() got an unexpected keyword argument ’join_axes"</li>
+</ol>
+<p>pandas 1.0이상의 버전에서 join_axes의 코드가 삭제되었기 때문에 발생하는 문제이다</p>
+<p>우선 본인의 pandas 버전을 확인해본다</p>
+<pre class="python"><code>pandas.showversion()</code></pre>
+<p>pandas의 버전이 1.0이상인 경우, pandas 0.25.0의 버전으로 낮춰준다</p>
+<pre><code>$ pip install pandas==0.25.0</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>c++ visual studio 설치후 다시 업그레이드</li>
+</ol>
 </div>
 
     </div>
@@ -102,7 +139,22 @@
     </div>
     
 
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
     
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
   </body>

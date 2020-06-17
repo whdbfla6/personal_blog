@@ -17,7 +17,8 @@
       <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/17/apartment-price-prediction-eda/</guid>
-      <description>1. 분석을 위한 기본적인 데이터 전처리1) 분석에 용이하도록 object 변수 변환학교 학생수를 숫자형으로 변환area에서 숫자가 아닌 부분 제거’school_addr_town’에서 ~길의 내용을 제거하고 ~로까지 확인한다df[&amp;#39;school_students&amp;#39;] = pd.to_numeric(df[&amp;#39;school_students&amp;#39;])# area에서 숫자가 아닌 부분을 제거해준다 import redf[&amp;#39;area&amp;#39;] = df[&amp;#39;area&amp;#39;].apply(lambda x: int(re.split(&amp;#39;\D&amp;#39;,x)[0]))import redf[&amp;#39;school_addr_town&amp;#39;] = df[&amp;#39;school_addr_town&amp;#39;].apply(lambda x: re.split(&amp;#39;\d&amp;#39;,x)[0])df[&amp;#39;school_addr_town&amp;#39;] = df[&amp;#39;school_addr_town&amp;#39;].apply(lambda x: x.replace(&amp;#39;로&amp;#39;,&amp;#39;동&amp;#39;))2) null값 확인학교 학생수에 null값이 발생하였고, 0의 값으로 대체df = df.</description>
+      <description>0. 들어가며이 게시글은 서울 아파트 실거래가 예측 시스템을 구축하는 프로젝트에서 필자가 맡은 EDA파트를 담고 있다
+1. 분석을 위한 기본적인 데이터 전처리1) 분석에 용이하도록 object 변수 변환학교 학생수를 숫자형으로 변환area에서 숫자가 아닌 부분 제거’school_addr_town’에서 ~길의 내용을 제거하고 ~로까지 확인한다df[&amp;#39;school_students&amp;#39;] = pd.to_numeric(df[&amp;#39;school_students&amp;#39;])# area에서 숫자가 아닌 부분을 제거해준다 import redf[&amp;#39;area&amp;#39;] = df[&amp;#39;area&amp;#39;].apply(lambda x: int(re.split(&amp;#39;\D&amp;#39;,x)[0]))import redf[&amp;#39;school_addr_town&amp;#39;] = df[&amp;#39;school_addr_town&amp;#39;].apply(lambda x: re.split(&amp;#39;\d&amp;#39;,x)[0])df[&amp;#39;school_addr_town&amp;#39;] = df[&amp;#39;school_addr_town&amp;#39;].</description>
     </item>
     
     <item>
@@ -26,7 +27,8 @@
       <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/17/eda-profilingtool/</guid>
-      <description>0. 들어가며1. pandas-profiling2. error 해결법</description>
+      <description>1. pandas-profilingpandas profiling은 수많은 양의 데이터에 대한 EDA를 하나의 보고서 형태로 만들어주는 패키지이다설치 방법pip사용pip install pandas-profiling[notebook]github에서 최신 버전 다운로드pip install https://github.com/pandas-profiling/pandas-profiling/archive/master.zipcondaconda install -c conda-forge pandas-profiling코드import pandas_profilingpandas_profiling.ProfileReport(data)2. error 해결법설치를 다 완료하였음에도 오류가 발생하는 경우가 있다.
+TypeError: concat() got an unexpected keyword argument ’join_axes&#34;pandas 1.0이상의 버전에서 join_axes의 코드가 삭제되었기 때문에 발생하는 문제이다</description>
     </item>
     
     <item>
@@ -35,7 +37,7 @@
       <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/17/how-to-use-github/</guid>
-      <description>0. 들어가며이번 데이터사이언스입문 수업을 들으면서 깃험을 처음 접하게 되었다. 코딩을 처음 접하는 초보자들을 위해 깃헙에 대해 소개하고자 한다1. 깃헙이란?깃헙에 대해 알기에 앞서 git이 무엇인지 알아야한다.깃은 버전 관리 시스템으로, 같은 파일을 다수의 사람이 동시에 작업하는 것을 가능하도록 하며, 과거에 작성한 코드 확인이 가능하다깃헙은2. 깃헙을 이용한 협업1) 저장소원격 저장소중앙 원격 저장소 : 여러명이 관리하는 프로젝트의 중심이 되는 저장소</description>
+      <description>0. 들어가며이번 데이터사이언스입문 수업을 들으면서 깃험을 처음 접하게 되었다. 코딩을 처음 접하는 초보자들을 위해 깃헙에 대해 소개하고자 한다1. 깃헙이란?깃헙에 대해 알기에 앞서 git이 무엇인지 알아야한다.깃은 버전 관리 시스템으로 같은 파일을 다수의 사람이 동시에 작업하는 것을 가능하도록 하며, 과거에 작성한 코드 확인이 가능하다깃헙은 깃이 포함된 파일들을 원격으로 전송하여 저장되는 사이트이다.2. 깃헙을 이용한 협업1) 저장소원격 저장소중앙 원격 저장소 : 여러명이 관리하는 프로젝트의 중심이 되는 저장소</description>
     </item>
     
     <item>

@@ -7,8 +7,49 @@ categories: []
 tags: []
 ---
 
-### 0. 들어가며
-
 ### 1. pandas-profiling
 
+- pandas profiling은 수많은 양의 데이터에 대한 EDA를 하나의 보고서 형태로 만들어주는 패키지이다
+
+#### 설치 방법
+- pip사용
+```
+pip install pandas-profiling[notebook]
+```
+
+- github에서 최신 버전 다운로드 
+```
+pip install https://github.com/pandas-profiling/pandas-profiling/archive/master.zip
+```
+- conda
+```
+conda install -c conda-forge pandas-profiling
+```
+
+#### 코드
+```python
+import pandas_profiling
+```
+
+```python
+pandas_profiling.ProfileReport(data)
+```
 ### 2. error 해결법
+설치를 다 완료하였음에도 오류가 발생하는 경우가 있다. 
+
+1. TypeError: concat() got an unexpected keyword argument 'join_axes"
+
+pandas 1.0이상의 버전에서 join_axes의 코드가 삭제되었기 때문에 발생하는 문제이다 
+
+우선 본인의 pandas 버전을 확인해본다 
+```python
+pandas.showversion()
+```
+
+pandas의 버전이 1.0이상인 경우, pandas 0.25.0의 버전으로 낮춰준다
+
+```
+$ pip install pandas==0.25.0
+```
+
+2. c++ visual studio 설치후 다시 업그레이드 
