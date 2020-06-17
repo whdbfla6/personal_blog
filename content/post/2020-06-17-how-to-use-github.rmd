@@ -30,14 +30,14 @@ tags: []
 #### 2) 일반적인 협업 흐름
 ##### 1. remote 저장소를 fork를 떠서 개인 원격 저장소를 만든다 
 
-![fork](pics/git_1.png)
+![fork](https://focused-elion-b6663c.netlify.app/pics/git_1.png)
 
 - fork를 눌러 개인 원격 저장소를 생성할 수 있다 
 
-![중앙원격저장소](pics/git_2.png)
+![중앙원격저장소](https://focused-elion-b6663c.netlify.app/pics/git_2.png)
 
 
-![개인원격저장소](pics/git_3.png)
+![개인원격저장소](https://focused-elion-b6663c.netlify.app/pics/git_3.png)
 
 
 ##### 2. 개인 원격 저장소를 본인의 컴퓨터에 복제하여 작업을 한다 
@@ -48,7 +48,7 @@ $ git clone 개인 원격 저장소 주소
 
 개인 원격 저장소 주소는 clone or download를 누르면 확인할 수 있다
 
-![clone&download](pics/git_4.png)
+![clone&download](https://focused-elion-b6663c.netlify.app/pics/git_4.png)
 
 * 다른 사람이 중앙 원격소에 코드 내용을 업로드하는 경우, 그 내용 또한 내 로컬 저장소에 가져와야 한다.
 
@@ -64,7 +64,7 @@ $git status
 ```
 이 명령어를 통해 본인이 수정한 코드 파일이 무엇인지 확인이 가능하다 
 
-![git status](pics/git_5.png)
+![git status](https://focused-elion-b6663c.netlify.app/pics/git_5.png)
 
 이 수많은 파일들 중 개인 원격 저장소에 업로드할 파일을 선택한다
 
